@@ -1,0 +1,6 @@
+name: MoreRecipes
+version:  Beta 6
+author: Owexz
+description: More ways to get Vanilla items & blocks!
+main: net.owexz.morerecipes.MoreRecipes
+depend: [Spout]
