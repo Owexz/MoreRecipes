@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/b04941/Documents/spoutpluginapi-dev-SNAPSHOT (1).jar"/>
-	<classpathentry kind="lib" path="/Users/b04941/Documents/bukkit-1.1-R4-20120211.000252-40.jar"/>
+	<classpathentry kind="lib" path="/Users/b04941/Documents/bukkit-1.1-R5-20120221.092836-8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

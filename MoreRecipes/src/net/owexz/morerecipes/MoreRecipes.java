@@ -254,12 +254,52 @@ public class MoreRecipes extends JavaPlugin
         recipe47.addIngredient(MaterialData.coal);
         recipe47.addIngredient(MaterialData.stone);
         SpoutManager.getMaterialManager().registerSpoutRecipe(recipe47);
+        SpoutShapedRecipe recipe48 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.redApple, 1));
+        recipe48.shape("AAA", "ABA", "AAA");
+        recipe48.setIngredient('A', MaterialData.spruceLeaves);
+        recipe48.setIngredient('B', MaterialData.sugar);
+        SpoutManager.getMaterialManager().registerSpoutRecipe(recipe48);
+        SpoutShapedRecipe recipe49 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.redApple, 1));
+        recipe49.shape("AAA", "ABA", "AAA");
+        recipe49.setIngredient('A', MaterialData.birchLeaves);
+        recipe49.setIngredient('B', MaterialData.sugar);
+        SpoutManager.getMaterialManager().registerSpoutRecipe(recipe49);
+        SpoutShapedRecipe recipe50 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.fern, 2));
+        recipe50.shape("AAA", "AAA", " A ");
+        recipe50.setIngredient('A', MaterialData.spruceLeaves);
+        SpoutManager.getMaterialManager().registerSpoutRecipe(recipe50);
+        SpoutShapedRecipe recipe51 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.fern, 2));
+        recipe51.shape("AAA", "AAA", " A ");
+        recipe51.setIngredient('A', MaterialData.birchLeaves);
+        SpoutManager.getMaterialManager().registerSpoutRecipe(recipe51);
+        SpoutShapedRecipe recipe52 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.tallGrass, 2));
+        recipe52.shape("A A", "A A", "AAA");
+        recipe52.setIngredient('A', MaterialData.birchLeaves);
+        SpoutManager.getMaterialManager().registerSpoutRecipe(recipe52);
+        SpoutShapedRecipe recipe53 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.tallGrass, 2));
+        recipe53.shape("A A", "A A", "AAA");
+        recipe53.setIngredient('A', MaterialData.spruceLeaves);
+        SpoutManager.getMaterialManager().registerSpoutRecipe(recipe53);
+        SpoutShapedRecipe recipe54 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.vines, 2));
+        recipe54.shape("AAA", "A A", "A A");
+        recipe54.setIngredient('A', MaterialData.birchLeaves);
+        SpoutShapedRecipe recipe55 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.vines, 2));
+        recipe55.shape("AAA", "A A", "A A");
+        recipe55.setIngredient('A', MaterialData.spruceLeaves);
+        SpoutShapedRecipe recipe56 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.lilyPad, 2));
+        recipe56.shape("A A", "AAA", "AAA");
+        recipe56.setIngredient('A', MaterialData.spruceLeaves);
+        SpoutManager.getMaterialManager().registerSpoutRecipe(recipe56);
+        SpoutShapedRecipe recipe57 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.lilyPad, 2));
+        recipe57.shape("A A", "AAA", "AAA");
+        recipe57.setIngredient('A', MaterialData.leaves);
+        SpoutManager.getMaterialManager().registerSpoutRecipe(recipe57);
         log.info("MoreRecipes by Owexz (Owexz.net) Enabled");
     }
  
     public void onDisable()
     {
-        log.info("MoreRecipes disabled.");
+        log.info("MoreRecipes by Owexz (Owexz.net) disabled.");
     }
  
     Logger log;
