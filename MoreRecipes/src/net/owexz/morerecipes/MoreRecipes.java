@@ -1,716 +1,708 @@
-/*
- *  Copyright 2012 Owexz.
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
- */
-
 package net.owexz.morerecipes;
- 
+
 import java.io.File;
 
-import java.util.logging.Logger;
-import net.owexz.morerecipes.CompressedCoalBlock;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.getspout.spoutapi.SpoutManager;
-import org.getspout.spoutapi.block.design.Texture;
-import org.getspout.spoutapi.inventory.*;
-import org.getspout.spoutapi.material.CustomBlock;
-import org.getspout.spoutapi.material.MaterialData;
- 
- 
-public class MoreRecipes extends JavaPlugin
-{
- 
-    public MoreRecipes()
-    {
-		log = Logger.getLogger("Minecraft");
-		compressedcoalBlockTexture = new Texture(this, "http://www.owexz.net/uploads/1/4/8/5/1485487/578122832.png", 64, 16, 16);
-    }
- 
-	public void onEnable() {
-    	compressedcoalBlock = new CompressedCoalBlock(this);
-		File configFile = new File(getDataFolder(), "config.yml");
-		if (!configFile.exists()) {
-		    saveDefaultConfig();
-		}
-		reloadConfig();
 
-		if (getConfig().getBoolean("web", true)) {
-			SpoutShapedRecipe recipe2 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.web, 1));
-			recipe2.shape("AAA", "AAA", "AAA");
-			recipe2.setIngredient('A', MaterialData.string);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe2);
+public class MoreRecipes extends JavaPlugin {
+
+	public void onEnable() {
+        if (!new File(getDataFolder(), "config.yml").exists()) {
+            saveDefaultConfig();
+        }
+        reloadConfig();
+		
+		if (getConfig().getBoolean("silverfish", true)) {
+			ShapedRecipe recipe1 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGGS, 1));
+			recipe1.shape(new String[] { "AAA", "ABA", "AAA" });
+			recipe1.setIngredient('A', Material.SMOOTH_BRICK);
+			recipe1.setIngredient('B', Material.COOKED_FISH);
+			getServer().addRecipe(recipe1);
 		}
 		
+		if (getConfig().getBoolean("web", true)) {
+			ShapedRecipe recipe2 = new ShapedRecipe(new ItemStack(Material.WEB, 1));
+			recipe2.shape(new String[] { "AAA", "AAA", "AAA" });
+			recipe2.setIngredient('A', Material.STRING);
+			getServer().addRecipe(recipe2);
+		}
+
 		if (getConfig().getBoolean("string", true)) {
-			SpoutShapelessRecipe recipe3 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.string, 2));
-			recipe3.addIngredient(MaterialData.whiteWool);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe3);
+			ShapelessRecipe recipe3 = new ShapelessRecipe(new ItemStack(Material.STRING, 2));
+			recipe3.addIngredient(Material.WOOL);
+			getServer().addRecipe(recipe3);
 		}
 		
 		if (getConfig().getBoolean("chainBoots", true)) {
-		SpoutShapedRecipe recipe4 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.chainBoots, 1));
-				recipe4.shape("C C", "B B", "A A");
-			recipe4.setIngredient('A', MaterialData.ironIngot);
-			recipe4.setIngredient('B', MaterialData.string);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe4);
+			ShapedRecipe recipe4 = new ShapedRecipe(new ItemStack(Material.CHAINMAIL_BOOTS, 1));
+			recipe4.shape(new String[] { "C C", "B B", "A A" });
+			recipe4.setIngredient('A', Material.IRON_INGOT);
+			recipe4.setIngredient('B', Material.STRING);
+			getServer().addRecipe(recipe4);
 		}
-
+		
 		if (getConfig().getBoolean("chainLeggings", true)) {
-			SpoutShapedRecipe recipe5 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.chainLeggings, 1));
-			recipe5.shape("ABA", "B B", "A A");
-			recipe5.setIngredient('A', MaterialData.ironIngot);
-			recipe5.setIngredient('B', MaterialData.string);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe5);
+			ShapedRecipe recipe5 = new ShapedRecipe(new ItemStack(Material.CHAINMAIL_LEGGINGS, 1));
+			recipe5.shape(new String[] { "ABA", "B B", "A A" });
+			recipe5.setIngredient('A', Material.IRON_INGOT);
+			recipe5.setIngredient('B', Material.STRING);
+			getServer().addRecipe(recipe5);
 		}
 		
 		if (getConfig().getBoolean("chainChestplate", true)) {
-			SpoutShapedRecipe recipe6 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.chainChestplate, 1));
-			recipe6.shape("A A", "BAB", "ABA");
-			recipe6.setIngredient('A', MaterialData.ironIngot);
-			recipe6.setIngredient('B', MaterialData.string);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe6);
+			ShapedRecipe recipe6 = new ShapedRecipe(new ItemStack(Material.CHAINMAIL_CHESTPLATE, 1));
+			recipe6.shape(new String[] { "A A", "BAB", "ABA" });
+			recipe6.setIngredient('A', Material.IRON_INGOT);
+			recipe6.setIngredient('B', Material.STRING);
+			getServer().addRecipe(recipe6);
 		}
-
+		
 		if (getConfig().getBoolean("chainHelmet", true)) {
-			SpoutShapedRecipe recipe7 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.chainHelmet, 1));
-			recipe7.shape("BAB", "A A");
-			recipe7.setIngredient('A', MaterialData.ironIngot);
-			recipe7.setIngredient('B', MaterialData.string);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe7);
+			ShapedRecipe recipe7 = new ShapedRecipe(new ItemStack(Material.CHAINMAIL_HELMET, 1));
+			recipe7.shape(new String[] { "BAB", "A A" });
+			recipe7.setIngredient('A', Material.IRON_INGOT);
+			recipe7.setIngredient('B', Material.STRING);
+			getServer().addRecipe(recipe7);
 		}
-
+		
 		if (getConfig().getBoolean("netherBrick", true)) {
-			SpoutShapedRecipe recipe8 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.netherBrick, 1));
-			recipe8.shape("AA ", "AA ", "   ");
-			recipe8.setIngredient('A', MaterialData.netherrack);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe8);
+			ShapedRecipe recipe8 = new ShapedRecipe(new ItemStack(Material.NETHER_BRICK, 1));
+			recipe8.shape(new String[] { "AA ", "AA ", "   " });
+			recipe8.setIngredient('A', Material.NETHERRACK);
+			getServer().addRecipe(recipe8);
 		}
-
+		
 		if (getConfig().getBoolean("saddle", true)) {
-			SpoutShapedRecipe recipe9 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.saddle, 1));
-			recipe9.shape(" A ", "BAB", "CAC");
-			recipe9.setIngredient('A', MaterialData.leather);
-			recipe9.setIngredient('B', MaterialData.ironIngot);
-			recipe9.setIngredient('C', MaterialData.string);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe9);
+			ShapedRecipe recipe9 = new ShapedRecipe(new ItemStack(Material.SADDLE, 1));
+			recipe9.shape(new String[] { " A ", "BAB", "CAC" });
+			recipe9.setIngredient('A', Material.LEATHER);
+			recipe9.setIngredient('B', Material.IRON_INGOT);
+			recipe9.setIngredient('C', Material.STRING);
+			getServer().addRecipe(recipe9);
 		}
-
+		
 		if (getConfig().getBoolean("grass", true)) {
-			SpoutShapelessRecipe recipe10 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.grass, 1));
-			recipe10.addIngredient(MaterialData.seeds);
-			recipe10.addIngredient(MaterialData.dirt);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe10);
+			ShapelessRecipe recipe10 = new ShapelessRecipe(new ItemStack(Material.GRASS, 1));
+			recipe10.addIngredient(Material.SEEDS);
+			recipe10.addIngredient(Material.DIRT);
+			getServer().addRecipe(recipe10);
 		}
-
+		
 		if (getConfig().getBoolean("mossStone", true)) {
-			SpoutShapedRecipe recipe11 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.mossStone, 5));
-			recipe11.shape("ABA", "BAB", "ABA");
-			recipe11.setIngredient('A', MaterialData.cobblestone);
-			recipe11.setIngredient('B', MaterialData.seeds);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe11);
+			ShapedRecipe recipe11 = new ShapedRecipe(new ItemStack(Material.MOSSY_COBBLESTONE, 5));
+			recipe11.shape(new String[] { "ABA", "BAB", "ABA" });
+			recipe11.setIngredient('A', Material.COBBLESTONE);
+			recipe11.setIngredient('B', Material.SEEDS);
+			getServer().addRecipe(recipe11);
 		}
-
+		
 		if (getConfig().getBoolean("ice", true)) {
-			SpoutShapedRecipe recipe12 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.ice, 3));
-			recipe12.shape("AAA", "ABA", "AAA");
-			recipe12.setIngredient('A', MaterialData.snowball);
-			recipe12.setIngredient('B', MaterialData.waterBucket);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe12);
+			ShapedRecipe recipe12 = new ShapedRecipe(new ItemStack(Material.ICE, 3));
+			recipe12.shape(new String[] { "AAA", "ABA", "AAA" });
+			recipe12.setIngredient('A', Material.SNOW_BALL);
+			recipe12.setIngredient('B', Material.WATER_BUCKET);
+			getServer().addRecipe(recipe12);
 		}
-
+		
 		if (getConfig().getBoolean("mycelium", true)) {
-			SpoutShapelessRecipe recipe13 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.mycelium, 2));
-			recipe13.addIngredient(MaterialData.brownMushroom);
-			recipe13.addIngredient(MaterialData.redMushroom);
-			recipe13.addIngredient(MaterialData.dirt);
-			recipe13.addIngredient(MaterialData.dirt);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe13);
+			ShapelessRecipe recipe13 = new ShapelessRecipe(new ItemStack(Material.MYCEL, 2));
+			recipe13.addIngredient(Material.BROWN_MUSHROOM);
+			recipe13.addIngredient(Material.RED_MUSHROOM);
+			recipe13.addIngredient(Material.DIRT);
+			recipe13.addIngredient(Material.DIRT);
+			getServer().addRecipe(recipe13);
 		}
-
+		
 		if (getConfig().getBoolean("crackedStoneBrick", true)) {
-			SpoutShapedRecipe recipe14 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.crackedStoneBricks, 5));
-			recipe14.shape("ABA", "BAB", "ABA");
-			recipe14.setIngredient('A', MaterialData.stoneBricks);
-			recipe14.setIngredient('B', MaterialData.flint);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe14);
+			ShapedRecipe recipe14 = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 5, (short)0, (byte)2));
+			recipe14.shape(new String[] { "ABA", "BAB", "ABA" });
+			recipe14.setIngredient('A', Material.SMOOTH_BRICK);
+			recipe14.setIngredient('B', Material.FLINT);
+			getServer().addRecipe(recipe14);
 		}
-
+		
 		if (getConfig().getBoolean("mossyStoneBricks", true)) {
-			SpoutShapedRecipe recipe15 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.mossyStoneBricks, 5));
-			recipe15.shape("ABA", "BAB", "ABA");
-			recipe15.setIngredient('A', MaterialData.stoneBricks);
-			recipe15.setIngredient('B', MaterialData.seeds);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe15);
+			ShapedRecipe recipe15 = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 5, (short)0, (byte)1));
+			recipe15.shape(new String[] { "ABA", "BAB", "ABA" });
+			recipe15.setIngredient('A', Material.SMOOTH_BRICK);
+			recipe15.setIngredient('B', Material.SEEDS);
+			getServer().addRecipe(recipe15);
 		}
-
+		
+		if (getConfig().getBoolean("circleStoneBricks", true)) {
+			ShapedRecipe recipe15 = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 5, (short)0, (byte)2));
+			recipe15.shape(new String[] { "ABA", "BAB", "ABA" });
+			recipe15.setIngredient('A', Material.SMOOTH_BRICK);
+			recipe15.setIngredient('B', Material.SEEDS);
+			getServer().addRecipe(recipe15);
+		}
+		
 		if (getConfig().getBoolean("sand", true)) {
-			SpoutShapelessRecipe recipe18 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.sand, 4));
-			recipe18.addIngredient(MaterialData.sandstone);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe18);
+			ShapelessRecipe recipe18 = new ShapelessRecipe(new ItemStack(Material.SAND, 4));
+			recipe18.addIngredient(Material.SANDSTONE);
+			getServer().addRecipe(recipe18);
 		}
-
+		
 		if (getConfig().getBoolean("clay", true)) {
-			SpoutShapelessRecipe recipe19 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.clay, 4));
-			recipe19.addIngredient(MaterialData.clayBlock);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe19);
+			ShapelessRecipe recipe19 = new ShapelessRecipe(new ItemStack(Material.CLAY_BALL, 4));
+			recipe19.addIngredient(Material.CLAY);
+			getServer().addRecipe(recipe19);
 		}
-
+		
 		if (getConfig().getBoolean("apple", true)) {
-			SpoutShapedRecipe recipe20 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.redApple, 1));
-			recipe20.shape("AAA", "ABA", "AAA");
-			recipe20.setIngredient('A', MaterialData.leaves);
-			recipe20.setIngredient('B', MaterialData.sugar);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe20);
+			ShapedRecipe recipe20 = new ShapedRecipe(new ItemStack(Material.APPLE, 1));
+			recipe20.shape(new String[] { "AAA", "ABA", "AAA" });
+			recipe20.setIngredient('A', Material.LEAVES);
+			recipe20.setIngredient('B', Material.SUGAR);
+			getServer().addRecipe(recipe20);
 		}
-
+		
 		if (getConfig().getBoolean("clayBlock", true)) {
-			SpoutShapedRecipe recipe21 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.clayBlock, 9));
-			recipe21.shape("AAA", "BBB", "CCC");
-			recipe21.setIngredient('A', MaterialData.sand);
-			recipe21.setIngredient('B', MaterialData.gravel);
-			recipe21.setIngredient('C', MaterialData.dirt);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe21);
+			ShapedRecipe recipe21 = new ShapedRecipe(new ItemStack(Material.CLAY, 9));
+			recipe21.shape(new String[] { "AAA", "BBB", "CCC" });
+			recipe21.setIngredient('A', Material.SAND);
+			recipe21.setIngredient('B', Material.GRAVEL);
+			recipe21.setIngredient('C', Material.DIRT);
+			getServer().addRecipe(recipe21);
 		}
-
+		
 		if (getConfig().getBoolean("sponge", true)) {
-			SpoutShapedRecipe recipe22 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.sponge, 1));
-			recipe22.shape("BAB", "ABA", "BAB");
-			recipe22.setIngredient('A', MaterialData.sand);
-			recipe22.setIngredient('B', MaterialData.string);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe22);
+			ShapedRecipe recipe22 = new ShapedRecipe(new ItemStack(Material.SPONGE, 1));
+			recipe22.shape(new String[] { "BAB", "ABA", "BAB" });
+			recipe22.setIngredient('A', Material.SAND);
+			recipe22.setIngredient('B', Material.STRING);
+			getServer().addRecipe(recipe22);
 		}
-
+		
 		if (getConfig().getBoolean("cocoaBeans", true)) {
-			SpoutShapedRecipe recipe23 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.cocoaBeans, 2));
-			recipe23.shape("AAA", "ABA", "AAA");
-			recipe23.setIngredient('A', MaterialData.sugar);
-			recipe23.setIngredient('B', MaterialData.cocoaBeans);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe23);
+			ShapedRecipe recipe23 = new ShapedRecipe(new ItemStack(Material.INK_SACK, 2, (short)0, (byte)3));
+			recipe23.shape(new String[] { "AAA", "ABA", "AAA" });
+			recipe23.setIngredient('A', Material.SUGAR);
+			recipe23.setIngredient('B', Material.INK_SACK.getNewData((byte)3));
+			getServer().addRecipe(recipe23);
 		}
-
+		
 		if (getConfig().getBoolean("blackMusicDisc", true)) {
-			SpoutShapedRecipe recipe24 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.blackMusicDisc, 1));
-			recipe24.shape("BAB", "ACA", "BAB");
-			recipe24.setIngredient('A', MaterialData.obsidian);
-			recipe24.setIngredient('B', MaterialData.goldIngot);
-			recipe24.setIngredient('C', MaterialData.inkSac);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe24);
+			ShapedRecipe recipe24 = new ShapedRecipe(new ItemStack(Material.RECORD_8, 1));
+			recipe24.shape(new String[] { "BAB", "ACA", "BAB" });
+			recipe24.setIngredient('A', Material.OBSIDIAN);
+			recipe24.setIngredient('B', Material.GOLD_INGOT);
+			recipe24.setIngredient('C', Material.INK_SACK);
+			getServer().addRecipe(recipe24);
 		}
-
+		
 		if (getConfig().getBoolean("brokenMusicDisc", true)) {
-			SpoutShapedRecipe recipe25 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.brokenMusicDisc, 1));
-			recipe25.shape("BAB", "ACA", "BAB");
-			recipe25.setIngredient('A', MaterialData.obsidian);
-			recipe25.setIngredient('B', MaterialData.goldIngot);
-			recipe25.setIngredient('C', MaterialData.diamond);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe25);
+			ShapedRecipe recipe25 = new ShapedRecipe(new ItemStack(Material.RECORD_11, 1));
+			recipe25.shape(new String[] { "BAB", "ACA", "BAB" });
+			recipe25.setIngredient('A', Material.OBSIDIAN);
+			recipe25.setIngredient('B', Material.GOLD_INGOT);
+			recipe25.setIngredient('C', Material.DIAMOND);
+			getServer().addRecipe(recipe25);
 		}
-
+		
 		if (getConfig().getBoolean("cyanMusicDisc", true)) {
-			SpoutShapedRecipe recipe26 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.cyanMusicDisc, 1));
-			recipe26.shape("BAB", "ACA", "BAB");
-			recipe26.setIngredient('A', MaterialData.obsidian);
-			recipe26.setIngredient('B', MaterialData.goldIngot);
-			recipe26.setIngredient('C', MaterialData.cyanDye);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe26);
+			ShapedRecipe recipe26 = new ShapedRecipe(new ItemStack(Material.RECORD_5, 1));
+			recipe26.shape(new String[] { "BAB", "ACA", "BAB" });
+			recipe26.setIngredient('A', Material.OBSIDIAN);
+			recipe26.setIngredient('B', Material.GOLD_INGOT);
+			recipe26.setIngredient('C', Material.INK_SACK.getNewData((byte)6));
+			getServer().addRecipe(recipe26);
 		}
-
+		
 		if (getConfig().getBoolean("forestGreenMusicDisc", true)) {
-			SpoutShapedRecipe recipe27 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.forestGreenMusicDisc, 1));
-			recipe27.shape("BAB", "ACA", "BAB");
-			recipe27.setIngredient('A', MaterialData.obsidian);
-			recipe27.setIngredient('B', MaterialData.goldIngot);
-			recipe27.setIngredient('C', MaterialData.cactusGreen);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe27);
+			ShapedRecipe recipe27 = new ShapedRecipe(new ItemStack(Material.RECORD_10, 1));
+			recipe27.shape(new String[] { "BAB", "ACA", "BAB" });
+			recipe27.setIngredient('A', Material.OBSIDIAN);
+			recipe27.setIngredient('B', Material.GOLD_INGOT);
+			recipe27.setIngredient('C', Material.INK_SACK.getNewData((byte)2));
+			getServer().addRecipe(recipe27);
 		}
-
+		
 		if (getConfig().getBoolean("goldMusicDisc", true)) {
-			SpoutShapedRecipe recipe28 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.goldMusicDisc, 1));
-			recipe28.shape("BAB", "ACA", "BAB");
-			recipe28.setIngredient('A', MaterialData.obsidian);
-			recipe28.setIngredient('B', MaterialData.goldIngot);
-			recipe28.setIngredient('C', MaterialData.dandelionYellow);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe28);
+			ShapedRecipe recipe28 = new ShapedRecipe(new ItemStack(Material.GOLD_RECORD, 1));
+			recipe28.shape(new String[] { "BAB", "ACA", "BAB" });
+			recipe28.setIngredient('A', Material.OBSIDIAN);
+			recipe28.setIngredient('B', Material.GOLD_INGOT);
+			recipe28.setIngredient('C', Material.INK_SACK.getNewData((byte)11));
+			getServer().addRecipe(recipe28);
 		}
-
+		
 		if (getConfig().getBoolean("greenMusicDisc", true)) {
-			SpoutShapedRecipe recipe29 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.greenMusicDisc, 1));
-			recipe29.shape("BAB", "ACA", "BAB");
-			recipe29.setIngredient('A', MaterialData.obsidian);
-			recipe29.setIngredient('B', MaterialData.goldIngot);
-			recipe29.setIngredient('C', MaterialData.limeDye);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe29);
+			ShapedRecipe recipe29 = new ShapedRecipe(new ItemStack(Material.GREEN_RECORD, 1));
+			recipe29.shape(new String[] { "BAB", "ACA", "BAB" });
+			recipe29.setIngredient('A', Material.OBSIDIAN);
+			recipe29.setIngredient('B', Material.GOLD_INGOT);
+			recipe29.setIngredient('C', Material.INK_SACK.getNewData((byte)10));
+			getServer().addRecipe(recipe29);
 		}
-
+		
 		if (getConfig().getBoolean("orangeMusicDisc", true)) {
-			SpoutShapedRecipe recipe30 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.orangeMusicDisc, 1));
-			recipe30.shape("BAB", "ACA", "BAB");
-			recipe30.setIngredient('A', MaterialData.obsidian);
-			recipe30.setIngredient('B', MaterialData.goldIngot);
-			recipe30.setIngredient('C', MaterialData.orangeDye);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe30);
+			ShapedRecipe recipe30 = new ShapedRecipe(new ItemStack(Material.RECORD_3, 1));
+			recipe30.shape(new String[] { "BAB", "ACA", "BAB" });
+			recipe30.setIngredient('A', Material.OBSIDIAN);
+			recipe30.setIngredient('B', Material.GOLD_INGOT);
+			recipe30.setIngredient('C', Material.INK_SACK.getNewData((byte)14));
+			getServer().addRecipe(recipe30);
 		}
-
+		
 		if (getConfig().getBoolean("purpleMusicDisc", true)) {
-			SpoutShapedRecipe recipe31 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.purpleMusicDisc, 1));
-			recipe31.shape("BAB", "ACA", "BAB");
-			recipe31.setIngredient('A', MaterialData.obsidian);
-			recipe31.setIngredient('B', MaterialData.goldIngot);
-			recipe31.setIngredient('C', MaterialData.purpleDye);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe31);
+			ShapedRecipe recipe31 = new ShapedRecipe(new ItemStack(Material.RECORD_7, 1));
+			recipe31.shape(new String[] { "BAB", "ACA", "BAB" });
+			recipe31.setIngredient('A', Material.OBSIDIAN);
+			recipe31.setIngredient('B', Material.GOLD_INGOT);
+			recipe31.setIngredient('C', Material.INK_SACK.getNewData((byte)5));
+			getServer().addRecipe(recipe31);
 		}
-
+		
 		if (getConfig().getBoolean("redMusicDisc", true)) {
-			SpoutShapedRecipe recipe32 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.redMusicDisc, 1));
-			recipe32.shape("BAB", "ACA", "BAB");
-			recipe32.setIngredient('A', MaterialData.obsidian);
-			recipe32.setIngredient('B', MaterialData.goldIngot);
-			recipe32.setIngredient('C', MaterialData.roseRed);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe32);
+			ShapedRecipe recipe32 = new ShapedRecipe(new ItemStack(Material.RECORD_4, 1));
+			recipe32.shape(new String[] { "BAB", "ACA", "BAB" });
+			recipe32.setIngredient('A', Material.OBSIDIAN);
+			recipe32.setIngredient('B', Material.GOLD_INGOT);
+			recipe32.setIngredient('C', Material.INK_SACK.getNewData((byte)1));
+			getServer().addRecipe(recipe32);
 		}
-
+		
 		if (getConfig().getBoolean("whiteMusicDisc", true)) {
-			SpoutShapedRecipe recipe33 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.whiteMusicDisc, 1));
-			recipe33.shape("BAB", "ACA", "BAB");
-			recipe33.setIngredient('A', MaterialData.obsidian);
-			recipe33.setIngredient('B', MaterialData.goldIngot);
-			recipe33.setIngredient('C', MaterialData.boneMeal);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe33);
+			ShapedRecipe recipe33 = new ShapedRecipe(new ItemStack(Material.RECORD_9, 1));
+			recipe33.shape(new String[] { "BAB", "ACA", "BAB" });
+			recipe33.setIngredient('A', Material.OBSIDIAN);
+			recipe33.setIngredient('B', Material.GOLD_INGOT);
+			recipe33.setIngredient('C', Material.INK_SACK.getNewData((byte)15));
+			getServer().addRecipe(recipe33);
 		}
-
+		
 		if (getConfig().getBoolean("blueMusicDisc", true)) {
-			SpoutShapedRecipe recipe34 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.blueMusicDisc, 1));
-			recipe34.shape("BAB", "ACA", "BAB");
-			recipe34.setIngredient('A', MaterialData.obsidian);
-			recipe34.setIngredient('B', MaterialData.goldIngot);
-			recipe34.setIngredient('C', MaterialData.lapisLazuli);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe34);
+			ShapedRecipe recipe34 = new ShapedRecipe(new ItemStack(Material.RECORD_6, 1));
+			recipe34.shape(new String[] { "BAB", "ACA", "BAB" });
+			recipe34.setIngredient('A', Material.OBSIDIAN);
+			recipe34.setIngredient('B', Material.GOLD_INGOT);
+			recipe34.setIngredient('C', Material.INK_SACK.getNewData((byte)4));
+			getServer().addRecipe(recipe34);
 		}
-
+		
 		if (getConfig().getBoolean("stick", true)) {
-			SpoutShapedRecipe recipe35 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.stick, 6));
-			recipe35.shape(" A ", " A ", " A ");
-			recipe35.setIngredient('A', MaterialData.sugarCane);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe35);
+			ShapedRecipe recipe35 = new ShapedRecipe(new ItemStack(Material.STICK, 6));
+			recipe35.shape(new String[] { " A ", " A ", " A " });
+			recipe35.setIngredient('A', Material.SUGAR_CANE);
+			getServer().addRecipe(recipe35);
 		}
-
+		
 		if (getConfig().getBoolean("wood", true)) {
-			SpoutShapedRecipe recipe36 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.wood, 1));
-			recipe36.shape("AA ", "AA ", "   ");
-			recipe36.setIngredient('A', MaterialData.stick);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe36);
+			ShapedRecipe recipe36 = new ShapedRecipe(new ItemStack(Material.WOOD, 1));
+			recipe36.shape(new String[] { "AA ", "AA ", "   " });
+			recipe36.setIngredient('A', Material.STICK);
+			getServer().addRecipe(recipe36);
 		}
-
+		
 		if (getConfig().getBoolean("glowstoneDust", true)) {
-			SpoutShapelessRecipe recipe37 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.glowstoneDust, 4));
-			recipe37.addIngredient(MaterialData.glowstoneBlock);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe37);
+			ShapelessRecipe recipe37 = new ShapelessRecipe(new ItemStack(Material.GLOWSTONE_DUST, 4));
+			recipe37.addIngredient(Material.GLOWSTONE);
+			getServer().addRecipe(recipe37);
 		}
 		
 		if (getConfig().getBoolean("fern", true)) {
-			SpoutShapedRecipe recipe38 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.fern, 2));
-			recipe38.shape("AAA", "AAA", " A ");
-			recipe38.setIngredient('A', MaterialData.leaves);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe38);
+			ShapedRecipe recipe38 = new ShapedRecipe(new ItemStack(Material.LONG_GRASS, 2, (short)0, (byte)2));
+			recipe38.shape(new String[] { "AAA", "AAA", " A " });
+			recipe38.setIngredient('A', Material.LEAVES);
+			getServer().addRecipe(recipe38);
 		}
-
+		
 		if (getConfig().getBoolean("vines", true)) {
-			SpoutShapedRecipe recipe39 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.vines, 2));
-			recipe39.shape("AAA", "A A", "A A");
-			recipe39.setIngredient('A', MaterialData.leaves);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe39);
+			ShapedRecipe recipe39 = new ShapedRecipe(new ItemStack(Material.VINE, 2));
+			recipe39.shape(new String[] { "AAA", "A A", "A A" });
+			recipe39.setIngredient('A', Material.LEAVES);
+			getServer().addRecipe(recipe39);
 		}
-
+		
 		if (getConfig().getBoolean("lilyPad", true)) {
-			SpoutShapedRecipe recipe40 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.lilyPad, 2));
-			recipe40.shape("A A", "AAA", "AAA");
-			recipe40.setIngredient('A', MaterialData.leaves);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe40);
+			ShapedRecipe recipe40 = new ShapedRecipe(new ItemStack(Material.WATER_LILY, 2));
+			recipe40.shape(new String[] { "A A", "AAA", "AAA" });
+			recipe40.setIngredient('A', Material.LEAVES);
+			getServer().addRecipe(recipe40);
 		}
-
+		
 		if (getConfig().getBoolean("tallGrass", true)) {
-			SpoutShapedRecipe recipe41 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.tallGrass, 2));
-			recipe41.shape("A A", "A A", "AAA");
-			recipe41.setIngredient('A', MaterialData.leaves);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe41);
+			ShapedRecipe recipe41 = new ShapedRecipe(new ItemStack(Material.LONG_GRASS, (short)0, (byte)1));
+			recipe41.shape(new String[] { "A A", "A A", "AAA" });
+			recipe41.setIngredient('A', Material.LEAVES);
+			getServer().addRecipe(recipe41);
 		}
-
+		
 		if (getConfig().getBoolean("ironOre", true)) {
-			SpoutShapelessRecipe recipe42 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.ironOre, 1));
-			recipe42.addIngredient(MaterialData.ironIngot);
-			recipe42.addIngredient(MaterialData.stone);
+			ShapelessRecipe recipe42 = new ShapelessRecipe(new ItemStack(Material.IRON_ORE, 1));
+			recipe42.addIngredient(Material.IRON_INGOT);
+			recipe42.addIngredient(Material.STONE);
 			getServer().addRecipe(recipe42);
 		}
-
+		
 		if (getConfig().getBoolean("goldOre", true)) {
-				SpoutShapelessRecipe recipe43 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.goldOre, 1));
-			recipe43.addIngredient(MaterialData.goldIngot);
-			recipe43.addIngredient(MaterialData.stone);
+			ShapelessRecipe recipe43 = new ShapelessRecipe(new ItemStack(Material.GOLD_ORE, 1));
+			recipe43.addIngredient(Material.GOLD_INGOT);
+			recipe43.addIngredient(Material.STONE);
 			getServer().addRecipe(recipe43);
 		}
-
+		
 		if (getConfig().getBoolean("redstoneOre", true)) {
-			SpoutShapelessRecipe recipe45 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.redstoneOre, 1));
-			recipe45.addIngredient(MaterialData.redstone);
-			recipe45.addIngredient(MaterialData.redstone);
-			recipe45.addIngredient(MaterialData.redstone);
-			recipe45.addIngredient(MaterialData.redstone);
-			recipe45.addIngredient(MaterialData.redstone);
-			recipe45.addIngredient(MaterialData.stone);
+			ShapelessRecipe recipe45 = new ShapelessRecipe(new ItemStack(Material.REDSTONE_ORE, 1));
+			recipe45.addIngredient(Material.REDSTONE);
+			recipe45.addIngredient(Material.REDSTONE);
+			recipe45.addIngredient(Material.REDSTONE);
+			recipe45.addIngredient(Material.REDSTONE);
+			recipe45.addIngredient(Material.REDSTONE);
+			recipe45.addIngredient(Material.STONE);
 			getServer().addRecipe(recipe45);
 		}
-
+		
 		if (getConfig().getBoolean("lapisOre", true)) {
-			SpoutShapelessRecipe recipe46 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.lapisOre, 1));
-			recipe46.addIngredient(MaterialData.lapisLazuli);
-			recipe46.addIngredient(MaterialData.lapisLazuli);
-			recipe46.addIngredient(MaterialData.lapisLazuli);
-			recipe46.addIngredient(MaterialData.lapisLazuli);
-			recipe46.addIngredient(MaterialData.lapisLazuli);
-			recipe46.addIngredient(MaterialData.lapisLazuli);
-			recipe46.addIngredient(MaterialData.lapisLazuli);
-			recipe46.addIngredient(MaterialData.lapisLazuli);
-			recipe46.addIngredient(MaterialData.stone);
+			ShapelessRecipe recipe46 = new ShapelessRecipe(new ItemStack(Material.LAPIS_ORE, 1));
+			recipe46.addIngredient(Material.INK_SACK.getNewData((byte)4));
+			recipe46.addIngredient(Material.INK_SACK.getNewData((byte)4));
+			recipe46.addIngredient(Material.INK_SACK.getNewData((byte)4));
+			recipe46.addIngredient(Material.INK_SACK.getNewData((byte)4));
+			recipe46.addIngredient(Material.INK_SACK.getNewData((byte)4));
+			recipe46.addIngredient(Material.INK_SACK.getNewData((byte)4));
+			recipe46.addIngredient(Material.INK_SACK.getNewData((byte)4));
+			recipe46.addIngredient(Material.INK_SACK.getNewData((byte)4));
+			recipe46.addIngredient(Material.STONE);
 			getServer().addRecipe(recipe46);
 		}
-
+		
 		if (getConfig().getBoolean("coalOre", true)) {
-			SpoutShapelessRecipe recipe47 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.coalOre, 1));
-			recipe47.addIngredient(MaterialData.coal);
-			recipe47.addIngredient(MaterialData.stone);
+			ShapelessRecipe recipe47 = new ShapelessRecipe(new ItemStack(Material.COAL_ORE, 1));
+			recipe47.addIngredient(Material.COAL);
+			recipe47.addIngredient(Material.STONE);
 			getServer().addRecipe(recipe47);
 		}
-
+		
 		if (getConfig().getBoolean("diamondOre", true)) {
-			SpoutShapelessRecipe recipe48 = new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.diamondOre, 1));
-			recipe48.addIngredient(MaterialData.diamond);
-			recipe48.addIngredient(MaterialData.stone);
-			getServer().addRecipe(recipe48);
-		}
-
-		if (getConfig().getBoolean("apple", true)) {
-			SpoutShapedRecipe recipe48 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.redApple, 1));
-			recipe48.shape("AAA", "ABA", "AAA");
-			recipe48.setIngredient('A', MaterialData.spruceLeaves);
-			recipe48.setIngredient('B', MaterialData.sugar);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe48);
-		}
-
-		if (getConfig().getBoolean("apple", true)) {
-			SpoutShapedRecipe recipe49 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.redApple, 1));
-			recipe49.shape("AAA", "ABA", "AAA");
-			recipe49.setIngredient('A', MaterialData.birchLeaves);
-			recipe49.setIngredient('B', MaterialData.sugar);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe49);
-		}
-
-		if (getConfig().getBoolean("fern", true)) {
-			SpoutShapedRecipe recipe50 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.fern, 2));
-			recipe50.shape("AAA", "AAA", " A ");
-			recipe50.setIngredient('A', MaterialData.spruceLeaves);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe50);
-		}
-
-		if (getConfig().getBoolean("fern", true)) {
-			SpoutShapedRecipe recipe51 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.fern, 2));
-			recipe51.shape("AAA", "AAA", " A ");
-			recipe51.setIngredient('A', MaterialData.birchLeaves);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe51);
-		}
-
-		if (getConfig().getBoolean("tallGrass", true)) {
-			SpoutShapedRecipe recipe52 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.tallGrass, 2));
-			recipe52.shape("A A", "A A", "AAA");
-			recipe52.setIngredient('A', MaterialData.birchLeaves);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe52);
-		}
-
-		if (getConfig().getBoolean("tallGrass", true)) {
-			SpoutShapedRecipe recipe53 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.tallGrass, 2));
-			recipe53.shape("A A", "A A", "AAA");
-			recipe53.setIngredient('A', MaterialData.spruceLeaves);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe53);
+			ShapelessRecipe recipe48bis = new ShapelessRecipe(new ItemStack(Material.DIAMOND_ORE, 1));
+			recipe48bis.addIngredient(Material.DIAMOND);
+			recipe48bis.addIngredient(Material.STONE);
+			getServer().addRecipe(recipe48bis);
 		}
 		
-		if (getConfig().getBoolean("vines", true)) {
-			SpoutShapedRecipe recipe54 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.vines, 2));
-			recipe54.shape("AAA", "A A", "A A");
-			recipe54.setIngredient('A', MaterialData.birchLeaves);
-		}
-		
-		if (getConfig().getBoolean("vines", true)) {
-			SpoutShapedRecipe recipe55 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.vines, 2));
-			recipe55.shape("AAA", "A A", "A A");
-			recipe55.setIngredient('A', MaterialData.spruceLeaves);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe55);
-		}
-		
-		if (getConfig().getBoolean("lilyPad", true)) {
-			SpoutShapedRecipe recipe56 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.lilyPad, 2));
-			recipe56.shape("A A", "AAA", "AAA");
-			recipe56.setIngredient('A', MaterialData.spruceLeaves);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe56);
-		}
-		
-		if (getConfig().getBoolean("lilyPad", true)) {
-			SpoutShapedRecipe recipe57 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.lilyPad, 2));
-			recipe57.shape("A A", "AAA", "AAA");
-			recipe57.setIngredient('A', MaterialData.leaves);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe57);
-		}
-		
-		if (getConfig().getBoolean("diamond", true)) {
-			SpoutShapedRecipe recipe58 = new SpoutShapedRecipe(new SpoutItemStack(compressedcoalBlock, 1));
-			recipe58.shape("AAA", "ABA", "AAA");
-			recipe58.setIngredient('A', MaterialData.coal);
-			recipe58.setIngredient('B', MaterialData.obsidian);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe58);
-		}
-		
-		if (getConfig().getBoolean("diamond", true)) {
-			SpoutShapedRecipe recipe1S = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.diamond, 1));
-			recipe1S.shape(" B ", "BAB", " B ");
-			recipe1S.setIngredient('A', MaterialData.obsidian);
-			recipe1S.setIngredient('B', compressedcoalBlock);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe1S);
-		}
-		
-		if (getConfig().getBoolean("diamond", true)) {
-			SpoutShapedRecipe recipe2S = new SpoutShapedRecipe(new SpoutItemStack(compressedcoalBlock, 1));
-			recipe2S.shape("AAA", "ABA", "AAA");
-			recipe2S.setIngredient('A', MaterialData.charcoal);
-			recipe2S.setIngredient('B', MaterialData.obsidian);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe2S);
-		}
-		
-		if (getConfig().getBoolean("diamond", true)) {
-			SpoutShapedRecipe recipe60 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.diamond, 1));
-			recipe60.shape(" B ", "BAB", " B ");
-			recipe60.setIngredient('A', MaterialData.obsidian);
-			recipe60.setIngredient('B', compressedcoalBlock);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe60);
+		if (getConfig().getBoolean("otherLeaves", true)) {
+			if (getConfig().getBoolean("apple", true)) {
+				ShapedRecipe recipe49 = new ShapedRecipe(new ItemStack(Material.APPLE, 1));
+				recipe49.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe49.setIngredient('A', Material.LEAVES.getNewData((byte)2));
+				recipe49.setIngredient('B', Material.SUGAR);
+				getServer().addRecipe(recipe49);
+				
+				ShapedRecipe recipe49bis = new ShapedRecipe(new ItemStack(Material.APPLE, 1));
+				recipe49bis.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe49bis.setIngredient('A', Material.LEAVES.getNewData((byte)1));
+				recipe49bis.setIngredient('B', Material.SUGAR);
+				getServer().addRecipe(recipe49bis);
+			}
+			
+		    if (getConfig().getBoolean("fern", true)) {
+				ShapedRecipe recipe50 = new ShapedRecipe(new ItemStack(Material.LEAVES, 2, (short)0, (byte)2));
+				recipe50.shape(new String[] { "AAA", "AAA", " A " });
+				recipe50.setIngredient('A', Material.LEAVES.getNewData((byte)1));
+				getServer().addRecipe(recipe50);
+				
+				ShapedRecipe recipe51 = new ShapedRecipe(new ItemStack(Material.LEAVES, 2, (short)0, (byte)2));
+				recipe51.shape(new String[] { "AAA", "AAA", " A " });
+				recipe51.setIngredient('A', Material.LEAVES.getNewData((byte)2));
+				getServer().addRecipe(recipe51);
+		    }
+			
+		    if (getConfig().getBoolean("tallGrass", true)) {
+				ShapedRecipe recipe52 = new ShapedRecipe(new ItemStack(Material.LEAVES, 2, (short)0, (byte)1));
+				recipe52.shape(new String[] { "A A", "A A", "AAA" });
+				recipe52.setIngredient('A', Material.LEAVES.getNewData((byte)2));
+				getServer().addRecipe(recipe52);
+				
+				ShapedRecipe recipe53 = new ShapedRecipe(new ItemStack(Material.LEAVES, 2, (short)0, (byte)1));
+				recipe53.shape(new String[] { "A A", "A A", "AAA" });
+				recipe53.setIngredient('A', Material.LEAVES.getNewData((byte)1));
+				getServer().addRecipe(recipe53);
+		    }
+			
+		    if (getConfig().getBoolean("vines", true)) {
+				ShapedRecipe recipe54 = new ShapedRecipe(new ItemStack(Material.VINE, 2));
+				recipe54.shape(new String[] { "AAA", "A A", "A A" });
+				recipe54.setIngredient('A', Material.LEAVES.getNewData((byte)2));
+				getServer().addRecipe(recipe54);
+				
+				ShapedRecipe recipe55 = new ShapedRecipe(new ItemStack(Material.VINE, 2));
+				recipe55.shape(new String[] { "AAA", "A A", "A A" });
+				recipe55.setIngredient('A', Material.LEAVES.getNewData((byte)1));
+				getServer().addRecipe(recipe55);
+		    }
+			
+		    if (getConfig().getBoolean("lilyPad", true)) {
+				ShapedRecipe recipe56 = new ShapedRecipe(new ItemStack(Material.WATER_LILY, 2));
+				recipe56.shape(new String[] { "A A", "AAA", "AAA" });
+				recipe56.setIngredient('A', Material.LEAVES.getNewData((byte)1));
+				getServer().addRecipe(recipe56);
+				
+				ShapedRecipe recipe57 = new ShapedRecipe(new ItemStack(Material.WATER_LILY, 2));
+				recipe57.shape(new String[] { "A A", "AAA", "AAA" });
+				recipe57.setIngredient('A', Material.LEAVES.getNewData((byte)2));
+				getServer().addRecipe(recipe57);
+		    }
 		}
 		
 		if (getConfig().getBoolean("blazeRod", true)) {
-			SpoutShapedRecipe recipe61= new SpoutShapedRecipe(new SpoutItemStack(MaterialData.blazeRod, 1));
-			recipe61.shape("AAB", "ABA", "BAA");
-			recipe61.setIngredient('A', MaterialData.redstone);
-			recipe61.setIngredient('B', MaterialData.goldIngot);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe61);
+			ShapedRecipe recipe61 = new ShapedRecipe(new ItemStack(Material.BLAZE_ROD, 1));
+			recipe61.shape(new String[] { "AAB", "ABA", "BAA" });
+			recipe61.setIngredient('A', Material.REDSTONE);
+			recipe61.setIngredient('B', Material.GOLD_INGOT);
+			getServer().addRecipe(recipe61);
 		}
 		
 		if (getConfig().getBoolean("slimeball", true)) {
-			SpoutShapedRecipe recipe62 = new SpoutShapedRecipe(new SpoutItemStack(MaterialData.slimeball, 1));
-			recipe62.shape(" C ", "BAB", "   ");
-			recipe62.setIngredient('A', MaterialData.milk);
-			recipe62.setIngredient('B', MaterialData.limeDye);
-			recipe62.setIngredient('C', MaterialData.fermentedSpiderEye);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe62);
+			ShapedRecipe recipe62 = new ShapedRecipe(new ItemStack(Material.SLIME_BALL, 1));
+			recipe62.shape(new String[] { " C ", "BAB", "   " });
+			recipe62.setIngredient('A', Material.MILK_BUCKET);
+			recipe62.setIngredient('B', Material.INK_SACK.getNewData((byte)10));
+			recipe62.setIngredient('C', Material.FERMENTED_SPIDER_EYE);
+			getServer().addRecipe(recipe62);
 		}
 		
 		if (getConfig().getBoolean("ghastTear", true)) {
-			SpoutShapedRecipe recipe63= new SpoutShapedRecipe(new SpoutItemStack(MaterialData.ghastTear, 1));
-			recipe63.shape("AAA", "ABA", "AAA");
-			recipe63.setIngredient('A', MaterialData.ironIngot);
-			recipe63.setIngredient('B', MaterialData.goldNugget);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe63);
+			ShapedRecipe recipe63 = new ShapedRecipe(new ItemStack(Material.GHAST_TEAR, 1));
+			recipe63.shape(new String[] { "AAA", "ABA", "AAA" });
+			recipe63.setIngredient('A', Material.IRON_INGOT);
+			recipe63.setIngredient('B', Material.GOLD_NUGGET);
+			getServer().addRecipe(recipe63);
 		}
 		
-			if (getConfig().getBoolean("netherWart", true)) {
-			SpoutShapelessRecipe recipe64= new SpoutShapelessRecipe(new SpoutItemStack(MaterialData.netherWart,3));
-			recipe64.addIngredient(MaterialData.rottenFlesh);
-			recipe64.addIngredient(MaterialData.redMushroom);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe64);
+		if (getConfig().getBoolean("netherWart", true)) {
+			ShapedRecipe recipe64 = new ShapedRecipe(new ItemStack(Material.NETHER_STALK, 1));
+			recipe64.shape(new String[] { "AAA", "ABA", "ACA" });
+			recipe64.setIngredient('A', Material.REDSTONE);
+			recipe64.setIngredient('B', Material.RED_MUSHROOM);
+			recipe64.setIngredient('C', Material.BROWN_MUSHROOM);
+			getServer().addRecipe(recipe64);
 		}
 		
 		if (getConfig().getBoolean("gunpowder", true)) {
-			SpoutShapedRecipe recipe65= new SpoutShapedRecipe(new SpoutItemStack(MaterialData.gunpowder, 2));
-			recipe65.shape(" A ", "AAA", " A ");
-			recipe65.setIngredient('A', MaterialData.soulSand);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe65);
+			ShapedRecipe recipe65 = new ShapedRecipe(new ItemStack(Material.SULPHUR, 2));
+			recipe65.shape(new String[] { " A ", "AAA", " A " });
+			recipe65.setIngredient('A', Material.SOUL_SAND);
+			getServer().addRecipe(recipe65);
 		}
 		
 		if (getConfig().getBoolean("enderPearl", true)) {
-			SpoutShapedRecipe recipe66= new SpoutShapedRecipe(new SpoutItemStack(MaterialData.enderPearl, 1));
-			recipe66.shape("AAA", "ABA", "AAA");
-			recipe66.setIngredient('A', MaterialData.lapisLazuli);
-			recipe66.setIngredient('B', MaterialData.glassBottle);
-			SpoutManager.getMaterialManager().registerSpoutRecipe(recipe66);
+			ShapedRecipe recipe66 = new ShapedRecipe(new ItemStack(Material.ENDER_PEARL, 1));
+			recipe66.shape(new String[] { "AAA", "ABA", "AAA" });
+			recipe66.setIngredient('A', Material.INK_SACK.getNewData((byte)4));
+			recipe66.setIngredient('B', Material.GLASS_BOTTLE);
+			getServer().addRecipe(recipe66);
 		}
 		
-		if (getConfig().getBoolean("MonsterEggs", true)) {
-			ShapedRecipe recipe67 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)50));
-			recipe67.shape("AAA", "ABA", "AAA");
-			recipe67.setIngredient('A', Material.SULPHUR);
-			recipe67.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe67);
-			ShapedRecipe recipe68 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)51));
-			recipe68.shape("AAA", "ABA", "AAA");
-			recipe68.setIngredient('A', Material.BONE);
-			recipe68.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe68);
-			ShapedRecipe recipe69 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)52));
-			recipe69.shape("ACA", "CBC", "ACA");
-			recipe69.setIngredient('A', Material.STRING);
-			recipe69.setIngredient('B', Material.EGG);
-			recipe69.setIngredient('C', Material.SPIDER_EYE);
-			Bukkit.getServer().addRecipe(recipe69);
-			ShapedRecipe recipe70 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)53));
-			recipe70.shape("ACA", "CBC", "ACA");
-			recipe70.setIngredient('A', Material.ROTTEN_FLESH);
-			recipe70.setIngredient('B', Material.EGG);
-			recipe70.setIngredient('C', Material.GOLD_INGOT);
-			Bukkit.getServer().addRecipe(recipe70);
-			ShapedRecipe recipe71 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)54));
-			recipe71.shape("AAA", "ABA", "AAA");
-			recipe71.setIngredient('A', Material.ROTTEN_FLESH);
-			recipe71.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe71);
-			ShapedRecipe recipe72 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)55));
-			recipe72.shape("AAA", "ABA", "AAA");
-			recipe72.setIngredient('A', Material.SLIME_BALL);
-			recipe72.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe72);
-			ShapedRecipe recipe73 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)56));
-			recipe73.shape("AAA", "ABA", "AAA");
-			recipe73.setIngredient('A', Material.GHAST_TEAR);
-			recipe73.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe73);
-			ShapedRecipe recipe74 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)57));
-			recipe74.shape("ACA", "CBC", "ACA");
-			recipe74.setIngredient('A', Material.ROTTEN_FLESH);
-			recipe74.setIngredient('B', Material.EGG);
-			recipe74.setIngredient('C', Material.PORK);
-			Bukkit.getServer().addRecipe(recipe74);
-			ShapedRecipe recipe75 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)58));
-			recipe75.shape("AAA", "ABA", "AAA");
-			recipe75.setIngredient('A', Material.ENDER_PEARL);
-			recipe75.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe75);
-			ShapedRecipe recipe76 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)59));
-			recipe76.shape("ACA", "CBC", "ACA");
-			recipe76.setIngredient('A', Material.SPIDER_EYE);
-			recipe76.setIngredient('B', Material.EGG);
-			recipe76.setIngredient('C', Material.STRING);
-			Bukkit.getServer().addRecipe(recipe76);
-			ShapedRecipe recipe77 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)60));
-			recipe77.shape("AAA", "ABA", "AAA");
-			recipe77.setIngredient('A', Material.IRON_INGOT);
-			recipe77.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe77);
-			ShapedRecipe recipe78 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)61));
-			recipe78.shape("AAA", "ABA", "AAA");
-			recipe78.setIngredient('A', Material.BLAZE_ROD);
-			recipe78.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe78);
-			ShapedRecipe recipe79 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)62));
-			recipe79.shape("AAA", "ABA", "AAA");
-			recipe79.setIngredient('A', Material.MAGMA_CREAM);
-			recipe79.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe79);
-			ShapedRecipe recipe80 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 0, (short)63));
-			recipe80.shape("AAA", "ABA", "AAA");
-			recipe80.setIngredient('A', Material.DRAGON_EGG);
-			recipe80.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe80);
-			ShapedRecipe recipe81 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)90));
-			recipe81.shape("AAA", "ABA", "AAA");
-			recipe81.setIngredient('A', Material.PORK);
-			recipe81.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe81);
-			ShapedRecipe recipe82 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)91));
-			recipe82.shape("AAA", "ABA", "AAA");
-			recipe82.setIngredient('A', Material.WOOL);
-			recipe82.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe82);
-			ShapedRecipe recipe83 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)92));
-			recipe83.shape("ACA", "CBC", "ACA");
-			recipe83.setIngredient('A', Material.RAW_BEEF);
-			recipe83.setIngredient('B', Material.EGG);
-			recipe83.setIngredient('C', Material.LEATHER);
-			Bukkit.getServer().addRecipe(recipe83);
-			ShapedRecipe recipe84 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)93));
-			recipe84.shape("AAA", "ABA", "AAA");
-			recipe84.setIngredient('A', Material.FEATHER);
-			recipe84.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe84);
-			ShapedRecipe recipe85 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)94));
-			recipe85.shape("AAA", "ABA", "AAA");
-			recipe85.setIngredient('A', Material.INK_SACK);
-			recipe85.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe85);
-			ShapedRecipe recipe86 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)95));
-			recipe86.shape("ACA", "CBC", "ACA");
-			recipe86.setIngredient('A', Material.WOOL);
-			recipe86.setIngredient('B', Material.EGG);
-			recipe86.setIngredient('C', Material.BONE);
-			Bukkit.getServer().addRecipe(recipe86);
-			ShapedRecipe recipe87 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)96));
-			recipe87.shape("ACA", "CBC", "ACA");
-			recipe87.setIngredient('A', Material.RAW_BEEF);
-			recipe87.setIngredient('B', Material.EGG);
-			recipe87.setIngredient('C', Material.RED_MUSHROOM);
-			Bukkit.getServer().addRecipe(recipe87);
-			ShapedRecipe recipe88 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)97));
-			recipe88.shape("ACA", "ABA", "AAA");
-			recipe88.setIngredient('A', Material.SNOW_BALL);
-			recipe88.setIngredient('B', Material.EGG);
-			recipe88.setIngredient('C', Material.PUMPKIN);
-			Bukkit.getServer().addRecipe(recipe88);
-			ShapedRecipe recipe89 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)98));
-			recipe89.shape("ACA", "CBC", "ACA");
-			recipe89.setIngredient('A', Material.WOOL);
-			recipe89.setIngredient('B', Material.EGG);
-			recipe89.setIngredient('C', Material.RAW_FISH);
-			Bukkit.getServer().addRecipe(recipe89);
-			ShapedRecipe recipe90 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)99));
-			recipe90.shape(" A ", "CBC", "C C");
-			recipe90.setIngredient('A', Material.PUMPKIN);
-			recipe90.setIngredient('B', Material.EGG);
-			recipe90.setIngredient('C', Material.IRON_BLOCK);
-			Bukkit.getServer().addRecipe(recipe90);
-			ShapedRecipe recipe91 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)200));
-			recipe91.shape("AAA", "ABA", "ACA");
-			recipe91.setIngredient('A', Material.GLASS);
-			recipe91.setIngredient('B', Material.EGG);
-			recipe91.setIngredient('C', Material.FLINT_AND_STEEL);
-			Bukkit.getServer().addRecipe(recipe91);
-			ShapedRecipe recipe92 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)120));
-			recipe92.shape("ACA", "CBC", "ACA");
-			recipe92.setIngredient('A', Material.PORK);
-			recipe92.setIngredient('B', Material.EGG);
-			recipe92.setIngredient('C', Material.LEATHER);
-			Bukkit.getServer().addRecipe(recipe92);
-			ShapedRecipe recipe93 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)99));
-			recipe93.shape(" C ", "ABA", " A ");
-			recipe93.setIngredient('A', Material.IRON_BLOCK);
-			recipe93.setIngredient('B', Material.EGG);
-			Bukkit.getServer().addRecipe(recipe92);
-			recipe93.setIngredient('B', Material.PUMPKIN);
+	    if (getConfig().getBoolean("allMonsterEggs", true)) {
+	    	if (getConfig().getBoolean("monsterEggs.creeper", true)) {
+		    	ShapedRecipe recipe67 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)50));
+		        recipe67.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe67.setIngredient('A', Material.SULPHUR);
+		        recipe67.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe67);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.skeleton", true)) {
+		        ShapedRecipe recipe68 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)51));
+		        recipe68.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe68.setIngredient('A', Material.BONE);
+		        recipe68.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe68);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.spider", true)) {
+		        ShapedRecipe recipe69 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)52));
+		        recipe69.shape(new String[] { "ACA", "CBC", "ACA" });
+		        recipe69.setIngredient('A', Material.STRING);
+		        recipe69.setIngredient('B', Material.EGG);
+		        recipe69.setIngredient('C', Material.SPIDER_EYE);
+		        getServer().addRecipe(recipe69);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.giant", true)) {
+		        ShapedRecipe recipe70 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)53));
+		        recipe70.shape(new String[] { "ACA", "CBC", "ACA" });
+		        recipe70.setIngredient('A', Material.ROTTEN_FLESH);
+		        recipe70.setIngredient('B', Material.EGG);
+		        recipe70.setIngredient('C', Material.GOLD_INGOT);
+		        getServer().addRecipe(recipe70);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.zombie", true)) {
+		        ShapedRecipe recipe71 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)54));
+		        recipe71.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe71.setIngredient('A', Material.ROTTEN_FLESH);
+		        recipe71.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe71);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.slime", true)) {
+		        ShapedRecipe recipe72 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)55));
+		        recipe72.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe72.setIngredient('A', Material.SLIME_BALL);
+		        recipe72.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe72);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.ghast", true)) {
+		        ShapedRecipe recipe73 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)56));
+		        recipe73.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe73.setIngredient('A', Material.GHAST_TEAR);
+		        recipe73.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe73);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.pigzombie", true)) {
+		        ShapedRecipe recipe74 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)57));
+		        recipe74.shape(new String[] { "ACA", "CBC", "ACA" });
+		        recipe74.setIngredient('A', Material.ROTTEN_FLESH);
+		        recipe74.setIngredient('B', Material.EGG);
+		        recipe74.setIngredient('C', Material.PORK);
+		        getServer().addRecipe(recipe74);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.enderman", true)) {
+		        ShapedRecipe recipe75 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)58));
+		        recipe75.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe75.setIngredient('A', Material.ENDER_PEARL);
+		        recipe75.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe75);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.cavespider", true)) {
+		        ShapedRecipe recipe76 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)59));
+		        recipe76.shape(new String[] { "ACA", "CBC", "ACA" });
+		        recipe76.setIngredient('A', Material.SPIDER_EYE);
+		        recipe76.setIngredient('B', Material.EGG);
+		        recipe76.setIngredient('C', Material.STRING);
+		        getServer().addRecipe(recipe76);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.silverfish", true)) {
+		        ShapedRecipe recipe77 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)60));
+		        recipe77.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe77.setIngredient('A', Material.IRON_INGOT);
+		        recipe77.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe77);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.blaze", true)) {
+		        ShapedRecipe recipe78 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)61));
+		        recipe78.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe78.setIngredient('A', Material.BLAZE_ROD);
+		        recipe78.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe78);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.magmacube", true)) {
+		        ShapedRecipe recipe79 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)62));
+		        recipe79.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe79.setIngredient('A', Material.MAGMA_CREAM);
+		        recipe79.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe79);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.pig", true)) {
+		        ShapedRecipe recipe81 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)90));
+		        recipe81.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe81.setIngredient('A', Material.PORK);
+		        recipe81.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe81);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.sheep", true)) {
+		        ShapedRecipe recipe82 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)91));
+		        recipe82.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe82.setIngredient('A', Material.WOOL);
+		        recipe82.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe82);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.cow", true)) {
+		        ShapedRecipe recipe83 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)92));
+		        recipe83.shape(new String[] { "ACA", "CBC", "ACA" });
+		        recipe83.setIngredient('A', Material.RAW_BEEF);
+		        recipe83.setIngredient('B', Material.EGG);
+		        recipe83.setIngredient('C', Material.LEATHER);
+		        getServer().addRecipe(recipe83);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.chicken", true)) {
+		        ShapedRecipe recipe84 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)93));
+		        recipe84.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe84.setIngredient('A', Material.FEATHER);
+		        recipe84.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe84);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.squid", true)) {
+		        ShapedRecipe recipe85 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)94));
+		        recipe85.shape(new String[] { "AAA", "ABA", "AAA" });
+		        recipe85.setIngredient('A', Material.INK_SACK);
+		        recipe85.setIngredient('B', Material.EGG);
+		        getServer().addRecipe(recipe85);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.wolf", true)) {
+		        ShapedRecipe recipe86 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)95));
+		        recipe86.shape(new String[] { "ACA", "CBC", "ACA" });
+		        recipe86.setIngredient('A', Material.WOOL);
+		        recipe86.setIngredient('B', Material.EGG);
+		        recipe86.setIngredient('C', Material.BONE);
+		        getServer().addRecipe(recipe86);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.mooshroom", true)) {
+		        ShapedRecipe recipe87 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)96));
+		        recipe87.shape(new String[] { "ACA", "CBC", "ACA" });
+		        recipe87.setIngredient('A', Material.RAW_BEEF);
+		        recipe87.setIngredient('B', Material.EGG);
+		        recipe87.setIngredient('C', Material.RED_MUSHROOM);
+		        getServer().addRecipe(recipe87);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.snowgolem", true)) {
+		        ShapedRecipe recipe88 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)97));
+		        recipe88.shape(new String[] { "ACA", "ABA", "AAA" });
+		        recipe88.setIngredient('A', Material.SNOW_BALL);
+		        recipe88.setIngredient('B', Material.EGG);
+		        recipe88.setIngredient('C', Material.PUMPKIN);
+		        getServer().addRecipe(recipe88);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.ocelot", true)) {
+		        ShapedRecipe recipe89 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)98));
+		        recipe89.shape(new String[] { "ACA", "CBC", "ACA" });
+		        recipe89.setIngredient('A', Material.WOOL);
+		        recipe89.setIngredient('B', Material.EGG);
+		        recipe89.setIngredient('C', Material.RAW_FISH);
+		        getServer().addRecipe(recipe89);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.irongolem", true)) {
+		        ShapedRecipe recipe90 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)99));
+		        recipe90.shape(new String[] { " A ", "CBC", "C C" });
+		        recipe90.setIngredient('A', Material.PUMPKIN);
+		        recipe90.setIngredient('B', Material.EGG);
+		        recipe90.setIngredient('C', Material.IRON_BLOCK);
+		        getServer().addRecipe(recipe90);
+	    	}
+	        
+	    	if (getConfig().getBoolean("monsterEggs.villager", true)) {
+		        ShapedRecipe recipe92 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)120));
+		        recipe92.shape(new String[] { "ACA", "CBC", "ACA" });
+		        recipe92.setIngredient('A', Material.PORK);
+		        recipe92.setIngredient('B', Material.EGG);
+		        recipe92.setIngredient('C', Material.LEATHER);
+		        getServer().addRecipe(recipe92);
+	    	}
 		}
-		log.info("MoreRecipes by Owexz (Owexz.net) Enabled");
-    }
- 
-    public void onDisable()
-    {
-		log.info("MoreRecipes by Owexz (Owexz.net) disabled.");
-    }
-    public static CustomBlock compressedcoalBlock;
-    Logger log;
-    public Texture compressedcoalBlockTexture;
+	}
+
 }
