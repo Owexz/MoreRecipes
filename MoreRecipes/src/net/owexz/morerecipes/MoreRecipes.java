@@ -6,15 +6,16 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
+import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MoreRecipes extends JavaPlugin {
 
 	public void onEnable() {
-        if (!new File(getDataFolder(), "config.yml").exists()) {
-            saveDefaultConfig();
-        }
-        reloadConfig();
+		if (!new File(getDataFolder(), "config.yml").exists()) {
+			saveDefaultConfig();
+		}
+		reloadConfig();
 		
 		if (getConfig().getBoolean("silverfish", true)) {
 			ShapedRecipe recipe1 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGGS, 1));
@@ -118,7 +119,7 @@ public class MoreRecipes extends JavaPlugin {
 		}
 		
 		if (getConfig().getBoolean("crackedStoneBrick", true)) {
-			ShapedRecipe recipe14 = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 5, (short)0, (byte)2));
+			ShapedRecipe recipe14 = new ShapedRecipe(this.getItemStackWithData(Material.SMOOTH_BRICK, 5, (short)0, (byte)2));
 			recipe14.shape(new String[] { "ABA", "BAB", "ABA" });
 			recipe14.setIngredient('A', Material.SMOOTH_BRICK);
 			recipe14.setIngredient('B', Material.FLINT);
@@ -126,7 +127,7 @@ public class MoreRecipes extends JavaPlugin {
 		}
 		
 		if (getConfig().getBoolean("mossyStoneBricks", true)) {
-			ShapedRecipe recipe15 = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 5, (short)0, (byte)1));
+			ShapedRecipe recipe15 = new ShapedRecipe(this.getItemStackWithData(Material.SMOOTH_BRICK, 5, (short)0, (byte)1));
 			recipe15.shape(new String[] { "ABA", "BAB", "ABA" });
 			recipe15.setIngredient('A', Material.SMOOTH_BRICK);
 			recipe15.setIngredient('B', Material.SEEDS);
@@ -134,7 +135,7 @@ public class MoreRecipes extends JavaPlugin {
 		}
 		
 		if (getConfig().getBoolean("circleStoneBricks", true)) {
-			ShapedRecipe recipe15 = new ShapedRecipe(new ItemStack(Material.SMOOTH_BRICK, 5, (short)0, (byte)2));
+			ShapedRecipe recipe15 = new ShapedRecipe(this.getItemStackWithData(Material.SMOOTH_BRICK, 5, (short)0, (byte)2));
 			recipe15.shape(new String[] { "ABA", "BAB", "ABA" });
 			recipe15.setIngredient('A', Material.SMOOTH_BRICK);
 			recipe15.setIngredient('B', Material.SEEDS);
@@ -179,7 +180,7 @@ public class MoreRecipes extends JavaPlugin {
 		}
 		
 		if (getConfig().getBoolean("cocoaBeans", true)) {
-			ShapedRecipe recipe23 = new ShapedRecipe(new ItemStack(Material.INK_SACK, 2, (short)0, (byte)3));
+			ShapedRecipe recipe23 = new ShapedRecipe(this.getItemStackWithData(Material.INK_SACK, 2, (short)0, (byte)3));
 			recipe23.shape(new String[] { "AAA", "ABA", "AAA" });
 			recipe23.setIngredient('A', Material.SUGAR);
 			recipe23.setIngredient('B', Material.INK_SACK.getNewData((byte)3));
@@ -306,7 +307,7 @@ public class MoreRecipes extends JavaPlugin {
 		}
 		
 		if (getConfig().getBoolean("fern", true)) {
-			ShapedRecipe recipe38 = new ShapedRecipe(new ItemStack(Material.LONG_GRASS, 2, (short)0, (byte)2));
+			ShapedRecipe recipe38 = new ShapedRecipe(this.getItemStackWithData(Material.LONG_GRASS, 2, (short)0, (byte)2));
 			recipe38.shape(new String[] { "AAA", "AAA", " A " });
 			recipe38.setIngredient('A', Material.LEAVES);
 			getServer().addRecipe(recipe38);
@@ -378,7 +379,7 @@ public class MoreRecipes extends JavaPlugin {
 			recipe47.addIngredient(Material.STONE);
 			getServer().addRecipe(recipe47);
 		}
-		
+
 		if (getConfig().getBoolean("diamondOre", true)) {
 			ShapelessRecipe recipe48bis = new ShapelessRecipe(new ItemStack(Material.DIAMOND_ORE, 1));
 			recipe48bis.addIngredient(Material.DIAMOND);
@@ -401,31 +402,31 @@ public class MoreRecipes extends JavaPlugin {
 				getServer().addRecipe(recipe49bis);
 			}
 			
-		    if (getConfig().getBoolean("fern", true)) {
-				ShapedRecipe recipe50 = new ShapedRecipe(new ItemStack(Material.LEAVES, 2, (short)0, (byte)2));
+			if (getConfig().getBoolean("fern", true)) {
+				ShapedRecipe recipe50 = new ShapedRecipe(this.getItemStackWithData(Material.LEAVES, 2, (short)0, (byte)2));
 				recipe50.shape(new String[] { "AAA", "AAA", " A " });
 				recipe50.setIngredient('A', Material.LEAVES.getNewData((byte)1));
 				getServer().addRecipe(recipe50);
 				
-				ShapedRecipe recipe51 = new ShapedRecipe(new ItemStack(Material.LEAVES, 2, (short)0, (byte)2));
+				ShapedRecipe recipe51 = new ShapedRecipe(this.getItemStackWithData(Material.LEAVES, 2, (short)0, (byte)2));
 				recipe51.shape(new String[] { "AAA", "AAA", " A " });
 				recipe51.setIngredient('A', Material.LEAVES.getNewData((byte)2));
 				getServer().addRecipe(recipe51);
-		    }
+			}
 			
-		    if (getConfig().getBoolean("tallGrass", true)) {
-				ShapedRecipe recipe52 = new ShapedRecipe(new ItemStack(Material.LEAVES, 2, (short)0, (byte)1));
+			if (getConfig().getBoolean("tallGrass", true)) {
+				ShapedRecipe recipe52 = new ShapedRecipe(this.getItemStackWithData(Material.LEAVES, 2, (short)0, (byte)1));
 				recipe52.shape(new String[] { "A A", "A A", "AAA" });
 				recipe52.setIngredient('A', Material.LEAVES.getNewData((byte)2));
 				getServer().addRecipe(recipe52);
 				
-				ShapedRecipe recipe53 = new ShapedRecipe(new ItemStack(Material.LEAVES, 2, (short)0, (byte)1));
+				ShapedRecipe recipe53 = new ShapedRecipe(this.getItemStackWithData(Material.LEAVES, 2, (short)0, (byte)1));
 				recipe53.shape(new String[] { "A A", "A A", "AAA" });
 				recipe53.setIngredient('A', Material.LEAVES.getNewData((byte)1));
 				getServer().addRecipe(recipe53);
-		    }
+			}
 			
-		    if (getConfig().getBoolean("vines", true)) {
+			if (getConfig().getBoolean("vines", true)) {
 				ShapedRecipe recipe54 = new ShapedRecipe(new ItemStack(Material.VINE, 2));
 				recipe54.shape(new String[] { "AAA", "A A", "A A" });
 				recipe54.setIngredient('A', Material.LEAVES.getNewData((byte)2));
@@ -435,9 +436,9 @@ public class MoreRecipes extends JavaPlugin {
 				recipe55.shape(new String[] { "AAA", "A A", "A A" });
 				recipe55.setIngredient('A', Material.LEAVES.getNewData((byte)1));
 				getServer().addRecipe(recipe55);
-		    }
+			}
 			
-		    if (getConfig().getBoolean("lilyPad", true)) {
+			if (getConfig().getBoolean("lilyPad", true)) {
 				ShapedRecipe recipe56 = new ShapedRecipe(new ItemStack(Material.WATER_LILY, 2));
 				recipe56.shape(new String[] { "A A", "AAA", "AAA" });
 				recipe56.setIngredient('A', Material.LEAVES.getNewData((byte)1));
@@ -447,7 +448,7 @@ public class MoreRecipes extends JavaPlugin {
 				recipe57.shape(new String[] { "A A", "AAA", "AAA" });
 				recipe57.setIngredient('A', Material.LEAVES.getNewData((byte)2));
 				getServer().addRecipe(recipe57);
-		    }
+			}
 		}
 		
 		if (getConfig().getBoolean("blazeRod", true)) {
@@ -499,210 +500,231 @@ public class MoreRecipes extends JavaPlugin {
 			getServer().addRecipe(recipe66);
 		}
 		
-	    if (getConfig().getBoolean("allMonsterEggs", true)) {
-	    	if (getConfig().getBoolean("monsterEggs.creeper", true)) {
-		    	ShapedRecipe recipe67 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)50));
-		        recipe67.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe67.setIngredient('A', Material.SULPHUR);
-		        recipe67.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe67);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.skeleton", true)) {
-		        ShapedRecipe recipe68 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)51));
-		        recipe68.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe68.setIngredient('A', Material.BONE);
-		        recipe68.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe68);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.spider", true)) {
-		        ShapedRecipe recipe69 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)52));
-		        recipe69.shape(new String[] { "ACA", "CBC", "ACA" });
-		        recipe69.setIngredient('A', Material.STRING);
-		        recipe69.setIngredient('B', Material.EGG);
-		        recipe69.setIngredient('C', Material.SPIDER_EYE);
-		        getServer().addRecipe(recipe69);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.giant", true)) {
-		        ShapedRecipe recipe70 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)53));
-		        recipe70.shape(new String[] { "ACA", "CBC", "ACA" });
-		        recipe70.setIngredient('A', Material.ROTTEN_FLESH);
-		        recipe70.setIngredient('B', Material.EGG);
-		        recipe70.setIngredient('C', Material.GOLD_INGOT);
-		        getServer().addRecipe(recipe70);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.zombie", true)) {
-		        ShapedRecipe recipe71 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)54));
-		        recipe71.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe71.setIngredient('A', Material.ROTTEN_FLESH);
-		        recipe71.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe71);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.slime", true)) {
-		        ShapedRecipe recipe72 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)55));
-		        recipe72.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe72.setIngredient('A', Material.SLIME_BALL);
-		        recipe72.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe72);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.ghast", true)) {
-		        ShapedRecipe recipe73 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)56));
-		        recipe73.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe73.setIngredient('A', Material.GHAST_TEAR);
-		        recipe73.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe73);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.pigzombie", true)) {
-		        ShapedRecipe recipe74 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)57));
-		        recipe74.shape(new String[] { "ACA", "CBC", "ACA" });
-		        recipe74.setIngredient('A', Material.ROTTEN_FLESH);
-		        recipe74.setIngredient('B', Material.EGG);
-		        recipe74.setIngredient('C', Material.PORK);
-		        getServer().addRecipe(recipe74);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.enderman", true)) {
-		        ShapedRecipe recipe75 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)58));
-		        recipe75.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe75.setIngredient('A', Material.ENDER_PEARL);
-		        recipe75.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe75);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.cavespider", true)) {
-		        ShapedRecipe recipe76 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)59));
-		        recipe76.shape(new String[] { "ACA", "CBC", "ACA" });
-		        recipe76.setIngredient('A', Material.SPIDER_EYE);
-		        recipe76.setIngredient('B', Material.EGG);
-		        recipe76.setIngredient('C', Material.STRING);
-		        getServer().addRecipe(recipe76);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.silverfish", true)) {
-		        ShapedRecipe recipe77 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)60));
-		        recipe77.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe77.setIngredient('A', Material.IRON_INGOT);
-		        recipe77.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe77);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.blaze", true)) {
-		        ShapedRecipe recipe78 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)61));
-		        recipe78.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe78.setIngredient('A', Material.BLAZE_ROD);
-		        recipe78.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe78);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.magmacube", true)) {
-		        ShapedRecipe recipe79 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)62));
-		        recipe79.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe79.setIngredient('A', Material.MAGMA_CREAM);
-		        recipe79.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe79);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.pig", true)) {
-		        ShapedRecipe recipe81 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)90));
-		        recipe81.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe81.setIngredient('A', Material.PORK);
-		        recipe81.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe81);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.sheep", true)) {
-		        ShapedRecipe recipe82 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)91));
-		        recipe82.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe82.setIngredient('A', Material.WOOL);
-		        recipe82.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe82);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.cow", true)) {
-		        ShapedRecipe recipe83 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)92));
-		        recipe83.shape(new String[] { "ACA", "CBC", "ACA" });
-		        recipe83.setIngredient('A', Material.RAW_BEEF);
-		        recipe83.setIngredient('B', Material.EGG);
-		        recipe83.setIngredient('C', Material.LEATHER);
-		        getServer().addRecipe(recipe83);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.chicken", true)) {
-		        ShapedRecipe recipe84 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)93));
-		        recipe84.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe84.setIngredient('A', Material.FEATHER);
-		        recipe84.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe84);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.squid", true)) {
-		        ShapedRecipe recipe85 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)94));
-		        recipe85.shape(new String[] { "AAA", "ABA", "AAA" });
-		        recipe85.setIngredient('A', Material.INK_SACK);
-		        recipe85.setIngredient('B', Material.EGG);
-		        getServer().addRecipe(recipe85);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.wolf", true)) {
-		        ShapedRecipe recipe86 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)95));
-		        recipe86.shape(new String[] { "ACA", "CBC", "ACA" });
-		        recipe86.setIngredient('A', Material.WOOL);
-		        recipe86.setIngredient('B', Material.EGG);
-		        recipe86.setIngredient('C', Material.BONE);
-		        getServer().addRecipe(recipe86);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.mooshroom", true)) {
-		        ShapedRecipe recipe87 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)96));
-		        recipe87.shape(new String[] { "ACA", "CBC", "ACA" });
-		        recipe87.setIngredient('A', Material.RAW_BEEF);
-		        recipe87.setIngredient('B', Material.EGG);
-		        recipe87.setIngredient('C', Material.RED_MUSHROOM);
-		        getServer().addRecipe(recipe87);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.snowgolem", true)) {
-		        ShapedRecipe recipe88 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)97));
-		        recipe88.shape(new String[] { "ACA", "ABA", "AAA" });
-		        recipe88.setIngredient('A', Material.SNOW_BALL);
-		        recipe88.setIngredient('B', Material.EGG);
-		        recipe88.setIngredient('C', Material.PUMPKIN);
-		        getServer().addRecipe(recipe88);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.ocelot", true)) {
-		        ShapedRecipe recipe89 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)98));
-		        recipe89.shape(new String[] { "ACA", "CBC", "ACA" });
-		        recipe89.setIngredient('A', Material.WOOL);
-		        recipe89.setIngredient('B', Material.EGG);
-		        recipe89.setIngredient('C', Material.RAW_FISH);
-		        getServer().addRecipe(recipe89);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.irongolem", true)) {
-		        ShapedRecipe recipe90 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)99));
-		        recipe90.shape(new String[] { " A ", "CBC", "C C" });
-		        recipe90.setIngredient('A', Material.PUMPKIN);
-		        recipe90.setIngredient('B', Material.EGG);
-		        recipe90.setIngredient('C', Material.IRON_BLOCK);
-		        getServer().addRecipe(recipe90);
-	    	}
-	        
-	    	if (getConfig().getBoolean("monsterEggs.villager", true)) {
-		        ShapedRecipe recipe92 = new ShapedRecipe(new ItemStack(Material.MONSTER_EGG, 1, (short)0, (byte)120));
-		        recipe92.shape(new String[] { "ACA", "CBC", "ACA" });
-		        recipe92.setIngredient('A', Material.PORK);
-		        recipe92.setIngredient('B', Material.EGG);
-		        recipe92.setIngredient('C', Material.LEATHER);
-		        getServer().addRecipe(recipe92);
-	    	}
+		if (getConfig().getBoolean("allMonsterEggs", true)) {
+			if (getConfig().getBoolean("monsterEggs.creeper", true)) {
+				ShapedRecipe recipe67 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)50));
+				recipe67.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe67.setIngredient('A', Material.SULPHUR);
+				recipe67.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe67);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.skeleton", true)) {
+				ShapedRecipe recipe68 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)51));
+				recipe68.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe68.setIngredient('A', Material.BONE);
+				recipe68.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe68);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.spider", true)) {
+				ShapedRecipe recipe69 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)52));
+				recipe69.shape(new String[] { "ACA", "CBC", "ACA" });
+				recipe69.setIngredient('A', Material.STRING);
+				recipe69.setIngredient('B', Material.EGG);
+				recipe69.setIngredient('C', Material.SPIDER_EYE);
+				getServer().addRecipe(recipe69);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.giant", true)) {
+				ShapedRecipe recipe70 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)53));
+				recipe70.shape(new String[] { "ACA", "CBC", "ACA" });
+				recipe70.setIngredient('A', Material.ROTTEN_FLESH);
+				recipe70.setIngredient('B', Material.EGG);
+				recipe70.setIngredient('C', Material.GOLD_INGOT);
+				getServer().addRecipe(recipe70);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.zombie", true)) {
+				ShapedRecipe recipe71 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)54));
+				recipe71.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe71.setIngredient('A', Material.ROTTEN_FLESH);
+				recipe71.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe71);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.slime", true)) {
+				ShapedRecipe recipe72 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)55));
+				recipe72.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe72.setIngredient('A', Material.SLIME_BALL);
+				recipe72.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe72);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.ghast", true)) {
+				ShapedRecipe recipe73 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)56));
+				recipe73.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe73.setIngredient('A', Material.GHAST_TEAR);
+				recipe73.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe73);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.pigzombie", true)) {
+				ShapedRecipe recipe74 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)57));
+				recipe74.shape(new String[] { "ACA", "CBC", "ACA" });
+				recipe74.setIngredient('A', Material.ROTTEN_FLESH);
+				recipe74.setIngredient('B', Material.EGG);
+				recipe74.setIngredient('C', Material.PORK);
+				getServer().addRecipe(recipe74);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.enderman", true)) {
+				ShapedRecipe recipe75 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)58));
+				recipe75.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe75.setIngredient('A', Material.ENDER_PEARL);
+				recipe75.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe75);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.cavespider", true)) {
+				ShapedRecipe recipe76 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)59));
+				recipe76.shape(new String[] { "ACA", "CBC", "ACA" });
+				recipe76.setIngredient('A', Material.SPIDER_EYE);
+				recipe76.setIngredient('B', Material.EGG);
+				recipe76.setIngredient('C', Material.STRING);
+				getServer().addRecipe(recipe76);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.silverfish", true)) {
+				ShapedRecipe recipe77 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)60));
+				recipe77.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe77.setIngredient('A', Material.IRON_INGOT);
+				recipe77.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe77);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.blaze", true)) {
+				ShapedRecipe recipe78 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)61));
+				recipe78.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe78.setIngredient('A', Material.BLAZE_ROD);
+				recipe78.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe78);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.magmacube", true)) {
+				ShapedRecipe recipe79 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)62));
+				recipe79.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe79.setIngredient('A', Material.MAGMA_CREAM);
+				recipe79.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe79);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.pig", true)) {
+				ShapedRecipe recipe81 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)90));
+				recipe81.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe81.setIngredient('A', Material.PORK);
+				recipe81.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe81);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.sheep", true)) {
+				ShapedRecipe recipe82 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)91));
+				recipe82.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe82.setIngredient('A', Material.WOOL);
+				recipe82.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe82);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.cow", true)) {
+				ShapedRecipe recipe83 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)92));
+				recipe83.shape(new String[] { "ACA", "CBC", "ACA" });
+				recipe83.setIngredient('A', Material.RAW_BEEF);
+				recipe83.setIngredient('B', Material.EGG);
+				recipe83.setIngredient('C', Material.LEATHER);
+				getServer().addRecipe(recipe83);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.chicken", true)) {
+				ShapedRecipe recipe84 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)93));
+				recipe84.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe84.setIngredient('A', Material.FEATHER);
+				recipe84.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe84);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.squid", true)) {
+				ShapedRecipe recipe85 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)94));
+				recipe85.shape(new String[] { "AAA", "ABA", "AAA" });
+				recipe85.setIngredient('A', Material.INK_SACK);
+				recipe85.setIngredient('B', Material.EGG);
+				getServer().addRecipe(recipe85);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.wolf", true)) {
+				ShapedRecipe recipe86 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)95));
+				recipe86.shape(new String[] { "ACA", "CBC", "ACA" });
+				recipe86.setIngredient('A', Material.WOOL);
+				recipe86.setIngredient('B', Material.EGG);
+				recipe86.setIngredient('C', Material.BONE);
+				getServer().addRecipe(recipe86);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.mooshroom", true)) {
+				ShapedRecipe recipe87 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)96));
+				recipe87.shape(new String[] { "ACA", "CBC", "ACA" });
+				recipe87.setIngredient('A', Material.RAW_BEEF);
+				recipe87.setIngredient('B', Material.EGG);
+				recipe87.setIngredient('C', Material.RED_MUSHROOM);
+				getServer().addRecipe(recipe87);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.snowgolem", true)) {
+				ShapedRecipe recipe88 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)97));
+				recipe88.shape(new String[] { "ACA", "ABA", "AAA" });
+				recipe88.setIngredient('A', Material.SNOW_BALL);
+				recipe88.setIngredient('B', Material.EGG);
+				recipe88.setIngredient('C', Material.PUMPKIN);
+				getServer().addRecipe(recipe88);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.ocelot", true)) {
+				ShapedRecipe recipe89 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)98));
+				recipe89.shape(new String[] { "ACA", "CBC", "ACA" });
+				recipe89.setIngredient('A', Material.WOOL);
+				recipe89.setIngredient('B', Material.EGG);
+				recipe89.setIngredient('C', Material.RAW_FISH);
+				getServer().addRecipe(recipe89);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.irongolem", true)) {
+				ShapedRecipe recipe90 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)99));
+				recipe90.shape(new String[] { " A ", "CBC", "C C" });
+				recipe90.setIngredient('A', Material.PUMPKIN);
+				recipe90.setIngredient('B', Material.EGG);
+				recipe90.setIngredient('C', Material.IRON_BLOCK);
+				getServer().addRecipe(recipe90);
+			}
+			
+			if (getConfig().getBoolean("monsterEggs.villager", true)) {
+				ShapedRecipe recipe92 = new ShapedRecipe(this.getItemStackWithData(Material.MONSTER_EGG, 1, (short)0, (byte)120));
+				recipe92.shape(new String[] { "ACA", "CBC", "ACA" });
+				recipe92.setIngredient('A', Material.PORK);
+				recipe92.setIngredient('B', Material.EGG);
+				recipe92.setIngredient('C', Material.LEATHER);
+				getServer().addRecipe(recipe92);
+			}
+		} 
+		
+		if (getConfig().getBoolean("arrowToStick", true)) {			
+			ShapelessRecipe recipe93 = new ShapelessRecipe(new ItemStack(Material.STICK, 1));
+			recipe93.addIngredient(Material.ARROW);
+			getServer().addRecipe(recipe93);
 		}
+		
+		if (getConfig().getBoolean("diamond", true)) {
+			ShapedRecipe recipe94 = new ShapedRecipe(new ItemStack(Material.DIAMOND, 3));
+			recipe94.shape(new String[] { "ACA", "CBC", "ACA" });
+			recipe94.setIngredient('A', Material.LAVA_BUCKET);
+			recipe94.setIngredient('B', Material.COAL);
+			recipe94.setIngredient('C', Material.COAL_ORE);
+			getServer().addRecipe(recipe94);
+		}
+	}
+	
+	public ItemStack getItemStackWithData(final Material type, final int amount, final short damage, final Byte data) {
+		ItemStack stack = new ItemStack(type, amount, damage);
+		stack.setData(new MaterialData(type, data));
+		return stack;
 	}
 
 }
